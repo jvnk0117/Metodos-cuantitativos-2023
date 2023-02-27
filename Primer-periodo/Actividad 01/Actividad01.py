@@ -75,4 +75,7 @@ W3 = '%.3f'%(W3 + 0.001)
 
 
 #Calculating intervals 
+interval1 = []
+interval2 = []
+interval3 = []
 
