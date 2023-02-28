@@ -65,13 +65,19 @@ C3 = float(m.ceil(1 + 3.3*m.log(N3,10)))
 
 #Obtaining class width (W)
 W1 = float(max(truncatedNumbers1) - min(truncatedNumbers1)) / C1
-W1 = '%.4f'%(W1) 
+W1 = W1 + 0.0001
+W1 = int(W1*10000)/ 10000
+
 
 W2 = float(max(truncatedNumbers2) - min(truncatedNumbers2)) / C2
-W2 = '%.2f'%(W2 + 0.01) 
+W2 = W2 + 0.01
+W2 = int(W2*100)/ 100
+
+
 
 W3 = float(max(truncatedNumbers3) - min(truncatedNumbers3)) / C3
-W3 = '%.3f'%(W3 + 0.001) 
+W3 = W3 + 0.001
+W3 = int(W3*1000) / 1000
 
 
 #Calculating intervals 
@@ -79,3 +85,6 @@ interval1 = []
 interval2 = []
 interval3 = []
 
+print(W3)
+
+# int(x*10000) / 10000
