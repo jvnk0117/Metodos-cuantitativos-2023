@@ -1,4 +1,5 @@
 import math as m
+import numpy as np
 
 
 #reading data from sources
@@ -85,6 +86,63 @@ interval1 = []
 interval2 = []
 interval3 = []
 
-print(W3)
 
-# int(x*10000) / 10000
+holder1 = truncatedNumbers1[0]
+for i in range(int(C1)):
+    interval1.append(holder1)
+    holder1 += W1
+    holder1 = int(holder1 * 100) /100
+    interval1.append(holder1)
+interval1_tuple = [x for x in zip(*[iter(interval1)]*2)]
+
+holder2 = truncatedNumbers2[0]
+for i in range(int(C2)):
+    interval2.append(holder2)
+    holder2 += W2
+    holder2 = int(holder2 * 100) /100
+    interval2.append(holder2)
+interval2_tuple = [x for x in zip(*[iter(interval2)]*2)]
+
+holder3 = truncatedNumbers3[0]
+for i in range(int(C3)):
+    interval3.append(holder3)
+    holder3 += W3
+    holder3 = int(holder3 * 100) /100
+    interval3.append(holder3)
+interval1_tuple = [x for x in zip(*[iter(interval3)]*2)]
+
+#print(interval1_tuple)
+
+#total frecuencies
+totalFrecuencies1 = []
+totalFrecuencies2 = []
+totalFrecuencies3 = []
+
+totalCounter = 0
+for i in interval1_tuple:
+    for j in truncatedNumbers1:
+        if j in np.arange(i[0],i[1],0.01):
+            totalCounter += 1
+        else:
+            totalFrecuencies1.append()
+            totalCounter = 0
+
+
+totalCounter = 0
+for i in interval2_tuple:
+    for j in truncatedNumbers1:
+        if j in np.arange(i[0],i[1],0.0001):
+            totalCounter += 1
+        else:
+            totalFrecuencies2.append()
+            totalCounter = 0
+
+
+totalCounter = 0
+for i in interval3_tuple:
+    for j in truncatedNumbers1:
+        if j in np.arange(i[0],i[1],0.001):
+            totalCounter += 1
+        else:
+            totalFrecuencies3.append()
+            totalCounter = 0
