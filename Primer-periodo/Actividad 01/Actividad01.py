@@ -1,5 +1,6 @@
 import math as m
-import numpy as np
+import matplotlib.pyplot as plt
+
 
 
 #reading data from sources
@@ -91,7 +92,7 @@ holder1 = truncatedNumbers1[0]
 for i in range(int(C1)):
     interval1.append(holder1)
     holder1 += W1
-    holder1 = int(holder1 * 100) /100
+    holder1 = int(holder1 * 10000) /10000
     interval1.append(holder1)
 interval1_tuple = [x for x in zip(*[iter(interval1)]*2)]
 
@@ -107,42 +108,44 @@ holder3 = truncatedNumbers3[0]
 for i in range(int(C3)):
     interval3.append(holder3)
     holder3 += W3
-    holder3 = int(holder3 * 100) /100
+    holder3 = int(holder3 * 1000) /1000
     interval3.append(holder3)
-interval1_tuple = [x for x in zip(*[iter(interval3)]*2)]
+interval3_tuple = [x for x in zip(*[iter(interval3)]*2)]
 
-#print(interval1_tuple)
+#Counting frecuencies in truncated list
 
-#total frecuencies
-totalFrecuencies1 = []
-totalFrecuencies2 = []
-totalFrecuencies3 = []
 
-totalCounter = 0
+
+total_frecuencies1 = []
+counter1 = 0
 for i in interval1_tuple:
     for j in truncatedNumbers1:
-        if j in np.arange(i[0],i[1],0.01):
-            totalCounter += 1
-        else:
-            totalFrecuencies1.append()
-            totalCounter = 0
+        if j >= i[0] and j <= i[1]:
+            counter1 += 1
+    total_frecuencies1.append(counter1)
+    counter1=0
 
 
-totalCounter = 0
+total_frecuencies2 = []
+counter2 = 0
 for i in interval2_tuple:
-    for j in truncatedNumbers1:
-        if j in np.arange(i[0],i[1],0.0001):
-            totalCounter += 1
-        else:
-            totalFrecuencies2.append()
-            totalCounter = 0
+    for j in truncatedNumbers2:
+        if j >= i[0] and j <= i[1]:
+            counter2 += 1
+    total_frecuencies2.append(counter2)
+    counter2 = 0
 
 
-totalCounter = 0
+total_frecuencies3 = []
+counter3 = 0
 for i in interval3_tuple:
-    for j in truncatedNumbers1:
-        if j in np.arange(i[0],i[1],0.001):
-            totalCounter += 1
-        else:
-            totalFrecuencies3.append()
-            totalCounter = 0
+    for j in truncatedNumbers3:
+        if j >= i[0] and j <= i[1]:
+            counter3 += 1
+    total_frecuencies3.append(counter3)
+    counter3 = 0
+
+
+
+plt.plot(interval1_tuple, total_frecuencies1, label = "set 1")
+plt.show()
