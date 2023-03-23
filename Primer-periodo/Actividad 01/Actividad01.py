@@ -1,14 +1,15 @@
 import math as m
 import matplotlib.pyplot as plt
+from prettytable import PrettyTable
 
 
 
 #reading data from sources
-with open('Primer-periodo/Actividad 01/data01.txt','r') as f:
+with open('Actividad 01/data01.txt','r') as f:
     data1 = [line.strip() for line in f] 
-with open('Primer-periodo/Actividad 01/data02.txt','r') as f:
+with open('Actividad 01/data02.txt','r') as f:
     data2 = [line.strip() for line in f] 
-with open('Primer-periodo/Actividad 01/data03.txt','r') as f:
+with open('Actividad 01/data03.txt','r') as f:
     data3 = [line.strip() for line in f] 
 
 #cleaning data to float numbers
@@ -144,6 +145,8 @@ for i in interval3_tuple:
             counter3 += 1
     total_frecuencies3.append(counter3)
     counter3 = 0
+
+
 
 
 
