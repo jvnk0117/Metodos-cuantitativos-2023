@@ -1,3 +1,5 @@
+from math import sqrt
+
 #Declaring lists
 lines = []
 text1Words = []
@@ -11,6 +13,7 @@ with open('Tercer-periodo/text.txt') as textFile:
     for line in textFile:
         lines.append(line.lower())
 
+#Gathering sentences into lists
 for words in lines[0].split():
     text1Words.append(words)
 
@@ -26,7 +29,42 @@ for word in text2Words:
     if word not in wordBag:
         wordBag.append(word)
 
+#Vectorizing texts
+counter1 = 0
+counter2 = 0
+for word in wordBag:
+    for text1 in text1Words:
+        if word == text1:
+            counter1 += 1
+    text1Vector.append(counter1)
+    counter1 = 0
 
+    for text2 in text2Words:
+        if word == text2:
+            counter2 += 1
+    text2Vector.append(counter2)
+    counter2 = 0
 
+#Calculating similarities
+vectorDividend = 0
+for i in range(len(text1Vector)):
+   vectorDividend += text1Vector[i] * text2Vector[i]
+
+text1Divisor = 0
+for i in range(len(text1Vector)):
+    text1Divisor += text1Vector[i] ** 2
+
+text2Divisor = 0
+for i in range(len(text2Vector)):
+    text2Divisor += text2Vector[i] ** 2
+
+cosine = vectorDividend / (sqrt(text1Divisor) * sqrt(text2Divisor))
 
 print(wordBag)
+print(text1Vector)
+print(text2Vector)
+print(vectorDividend)
+print(text1Divisor)
+print(text2Divisor)
+print(cosine)
+
