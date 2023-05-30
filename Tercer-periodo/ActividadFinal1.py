@@ -1,5 +1,6 @@
-from math import sqrt
-
+#loafing 
+from math import sqrt, log
+from prettytable import PrettyTable
 #Declaring lists
 lines = []
 text1Words = []
@@ -58,13 +59,66 @@ text2Divisor = 0
 for i in range(len(text2Vector)):
     text2Divisor += text2Vector[i] ** 2
 
+#Obtaining cosine of vectors
 cosine = vectorDividend / (sqrt(text1Divisor) * sqrt(text2Divisor))
+if cosine < 0:
+    print(cosine , ': Not quite similar')
+if cosine >=0 and cosine <0.5:
+    print(cosine, ': Somewhat similar')
+if cosine > 0.5:
+    print(cosine , ': Likely similar')
 
-print(wordBag)
-print(text1Vector)
-print(text2Vector)
-print(vectorDividend)
-print(text1Divisor)
-print(text2Divisor)
-print(cosine)
 
+#TDF-IDF vectorization
+tfText1 = []
+tfText2 = []
+
+
+tfCounter1 = 0
+for word in wordBag:
+    for tfText in text1Words:
+        if word == tfText:
+            tfCounter1 += 1
+    tfText1.append(tfCounter1/ len(text1Words))
+    tfCounter1 = 0
+
+tfCounter2 = 0
+for word in wordBag:
+    for tfText in text2Words:
+        if word == tfText:
+            tfCounter2 += 1
+    tfText2.append(tfCounter2/ len(text2Words))
+    tfCounter2 = 0
+
+idfList = []
+documentsContainingWord = 0
+idf = 0
+for word in wordBag:
+    if word in text1Words:
+        documentsContainingWord += 1
+    if word in text2Words:
+        documentsContainingWord += 1
+    idf = log(len(lines) / (documentsContainingWord + 1)) + 1
+    idfList.append(round(idf,9))
+    idf = 0
+    documentsContainingWord = 0
+
+    
+#Computing final vector
+tfText1_IDF = []
+tfText2_IDF = []
+for i in range(0,len(wordBag)):
+    tfText1_IDF.append(tfText1[i] * idfList[i])
+    
+for i in range(0,len(wordBag)):
+    tfText2_IDF.append(tfText2[i] * idfList[i])
+
+tfTable = PrettyTable()
+tfTable.add_column('Words', wordBag)
+tfTable.add_column('TF(text 1)', tfText1)
+tfTable.add_column('TF(text 2)', tfText2)
+tfTable.add_column('IDF', idfList)
+tfTable.add_column('TF(text1 * IDF)', tfText1_IDF)
+tfTable.add_column('TF(text2 * IDF)', tfText2_IDF)
+
+print(tfTable)
