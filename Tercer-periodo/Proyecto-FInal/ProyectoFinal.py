@@ -38,9 +38,9 @@ mainMatrix = matrixGeneration(n)
 def platoonConflict(ledger):
     platoonAttacking = randint(0,n)
     attackValue = randint(0,10) / 100
-
-    for row in mainMatrix[platoonAttacking]:
-        if row.index(platoonAttacking) == platoonAttacking:
+    currentRow = mainMatrix[platoonAttacking]
+    for index, value in enumerate(currentRow):
+        if index == platoonAttacking:
             continue
         print(row)
     
